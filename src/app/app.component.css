@@ -1,0 +1,17 @@
+.container{
+    height: 100vh;
+}
+
+.main-content{
+    height: 100%;
+}
+
+.sidebar{
+    padding-top: 10%;
+    background-color: #ECF0F1;
+}
+
+.outlet-content{
+    padding-top: 10%;
+    background-color: #B3B6B7;
+}

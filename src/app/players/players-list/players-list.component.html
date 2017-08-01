@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-block">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Team</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="player-row" *ngFor="let player of players" (click)="choosePlayer(player.id)">
+          <td>{{player.firstName}}</td>
+          <td>{{player.lastName}}</td>
+          <td>{{player.team}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
