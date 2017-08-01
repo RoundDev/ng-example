@@ -5,7 +5,7 @@ import { GoogleService } from '../google.service';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent implements OnInit, AfterViewInit {
+export class HomePageComponent implements OnInit {
 
   constructor(private googleService: GoogleService) { }
 

@@ -6,5 +6,9 @@ export const teamsRoutes: Routes = [
     {
         path: '',
         component: TeamsListComponent
+    },
+    {
+        path: 'teams-list',
+        component: TeamsListComponent
     }
 ]
