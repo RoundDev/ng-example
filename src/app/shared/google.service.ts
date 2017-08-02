@@ -1,29 +1,19 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-
+import { WindowRefService } from './window-ref.service';
 declare var gapi;
-import { DOCUMENT } from '@angular/platform-browser';
-function getWindow(): any {
-  return window;
-}
 
 
 @Injectable()
 export class GoogleService {
-  get nativeWindow(): any {
-    return getWindow();
-  }
 
   auth2: any;
   user: BehaviorSubject<any>;
   isInit: boolean = false;
-  
-  constructor( @Inject(DOCUMENT) private document: any) {
+  document: any;
+  constructor(private windowRefService: WindowRefService) {
     this.user = new BehaviorSubject<any>(null);
-  }
-
-  getDoc() {
-    return this.document;
+    this.document = this.windowRefService.getDoc();
   }
 
   test() {
@@ -45,7 +35,10 @@ export class GoogleService {
   addBtnClickHandler(id: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
       let element = this.document.getElementById(id);
-      this.auth2.attachClickHandler(element, (googleUser) => {
+      console.log('added handler');
+      this.auth2.attachClickHandler(element, null, (googleUser) => {
+        console.log('signed in');
+        //this.getUser();
         resolve('done');
       })
     })
@@ -54,6 +47,8 @@ export class GoogleService {
   getUser() {
     let tmpUser = this.auth2.currentUser.get();
     let profile = tmpUser.getBasicProfile();
+    console.log('set user');
+    console.log(profile);
     this.user.next(profile);
   }
 
@@ -62,6 +57,7 @@ export class GoogleService {
     return new Promise((resolve, reject) => {
       this.auth2.signOut().then((auth2) => {
         this.auth2.disconnect();
+        console.log('signed out');
         resolve('done');
       });
     })

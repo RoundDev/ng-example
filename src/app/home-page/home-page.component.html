@@ -11,8 +11,8 @@
         <h4 *ngIf="!googleUser">Please Sign In</h4>
     </div>
     <div class="card-footer">
-        <button #googleBtn class="btn btn-primary" id="googleBtn"><span class="fa fa-google"></span></button>
-        <button class="btn btn-warning" (click)="signOut()">Sign Out</button>
+        <app-sign-in-button *ngIf="showSignIn == true"></app-sign-in-button>
+        <button *ngIf="showSignIn == false" class="btn btn-warning" (click)="signOut()">Sign Out</button>
         <button class="btn btn-secondary" (click)="getUser()">Get User</button>
     </div>
 </div>

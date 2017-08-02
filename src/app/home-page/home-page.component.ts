@@ -1,46 +1,49 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { GoogleService } from '../google.service';
+import { Component, OnInit } from '@angular/core';
+import { GoogleService } from '../shared/google.service';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-
-  @ViewChild('googleBtn') googleBtn: ElementRef;
-
   googleUser: any;
 
-  showSignin: boolean = true;
+  //use null to start, after google initializes and user is checked
+  //it will set to true/false and render buttons
+  showSignIn: boolean = null;
 
   constructor(private googleService: GoogleService) { }
 
   ngOnInit() {
     if (!this.googleService.isInit) {
       this.initGoogle();
+    } else {
+      this.initSubscribe();
     }
-    this.googleService.user.subscribe(val => {
-      this.googleUser = val;
-      console.log(this.googleUser);
-    })
-  }
-
-  ngAfterViewInit() {
   }
 
   initGoogle() {
+    //may want to init in app.component on app startup
     this.googleService.init().then(
       result => {
+        this.initSubscribe();
         this.getUser();
-        this.addGoogleButtonHandler()
       }
     );
   }
 
-  addGoogleButtonHandler() {
-    this.googleService.addBtnClickHandler('googleBtn').then((str) => {
-      this.getUser()
-    });
+  initSubscribe() {
+    //subscribe to the user
+    this.googleService.user.subscribe(val => {
+      if (val == null || val == undefined) {
+        //show sign in component
+        this.showSignIn = true;
+      } else {
+        //show sign out component
+        this.showSignIn = false;
+      }
+      this.googleUser = val;
+    })
   }
 
   getUser() {
@@ -49,7 +52,11 @@ export class HomePageComponent implements OnInit {
 
   signOut() {
     this.googleService.signOut().then(result => {
-      this.getUser();
+      //REMOVE THIS LINE WHEN NOT ON LOCAL HOST
+      //Faking the sign out
+      this.googleService.user.next(null);
+      //USE THIS LINE
+      //this.getUser();
     })
   }
 }

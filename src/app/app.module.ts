@@ -11,13 +11,16 @@ import { TeamsModule } from './teams/teams.module';
 import { PlayersModule } from './players/players.module';
 
 
-import { GoogleService } from './google.service';
+import { GoogleService } from './shared/google.service';
+import { WindowRefService } from './shared/window-ref.service';
+import { SignInButtonComponent } from './home-page/sign-in-button/sign-in-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
-    HomePageComponent
+    HomePageComponent,
+    SignInButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { GoogleService } from './google.service';
   ],
   providers: [
     appRoutingProviders,
-    GoogleService
+    GoogleService,
+    WindowRefService
   ],
   bootstrap: [AppComponent]
 })
