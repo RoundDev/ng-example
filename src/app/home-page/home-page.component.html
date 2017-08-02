@@ -5,3 +5,14 @@
         <h6>Use the sidebar to navigate to other components using a <b>routerLink</b> found in <b>sidebar.html</b></h6>
     </div>
 </div>
+<div class="card">
+    <div class="card-header">
+        <h4 *ngIf="googleUser">{{googleUser.ig}}</h4>
+        <h4 *ngIf="!googleUser">Please Sign In</h4>
+    </div>
+    <div class="card-footer">
+        <button #googleBtn class="btn btn-primary" id="googleBtn"><span class="fa fa-google"></span></button>
+        <button class="btn btn-warning" (click)="signOut()">Sign Out</button>
+        <button class="btn btn-secondary" (click)="getUser()">Get User</button>
+    </div>
+</div>
