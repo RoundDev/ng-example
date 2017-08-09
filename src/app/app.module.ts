@@ -14,7 +14,7 @@ import { PlayersModule } from './players/players.module';
 import { GoogleService } from './shared/google.service';
 import { WindowRefService } from './shared/window-ref.service';
 import { SignInButtonComponent } from './home-page/sign-in-button/sign-in-button.component';
-
+import { FormExampleModule } from './form-example/form-example.module'
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +28,8 @@ import { SignInButtonComponent } from './home-page/sign-in-button/sign-in-button
     routing,
     RouterModule,
     PlayersModule,
-    TeamsModule
+    TeamsModule,
+    FormExampleModule
   ],
   providers: [
     appRoutingProviders,

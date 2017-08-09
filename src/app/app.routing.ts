@@ -7,7 +7,7 @@ import { teamsRoutes } from './teams/teams.routing';
 
 import { PlayersComponent } from './players/players.component';
 import { playersRoutes } from './players/players.routing';
-
+import { FormExampleComponent } from './form-example/form-example.component';
 //use app.routing to set your home component for the E
 const appRoutes: Routes = [
     {
@@ -27,6 +27,10 @@ const appRoutes: Routes = [
         path: 'players',
         component: PlayersComponent,
         children: playersRoutes
+    },
+    {
+        path: 'form-example',
+        component: FormExampleComponent
     }
 ]
 

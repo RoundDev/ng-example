@@ -1,0 +1,22 @@
+<div class="card">
+  <!--see form-example.component.css for card-header css-->
+  <div class="card-header" (click)="toggleFormOne()">
+    Form Example One
+    <span class="fa fa-caret-up pull-right" *ngIf="!showFormOne"></span>
+    <span class="fa fa-caret-down pull-right" *ngIf="showFormOne"></span>
+  </div>
+  <div class="card-block" *ngIf="showFormOne">
+    <app-form-one></app-form-one>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header" (click)="toggleFormTwo()">
+    Form Example Two 
+    <span class="fa fa-caret-up pull-right" *ngIf="!showFormTwo"></span>
+    <span class="fa fa-caret-down pull-right" *ngIf="showFormTwo"></span>
+  </div>
+  <div class="card-block" *ngIf="showFormTwo">
+    <app-form-two></app-form-two>
+  </div>
+</div>

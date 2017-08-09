@@ -1,0 +1,8 @@
+.card-header{
+        background: #8E44AD;
+}
+
+.card-header:hover{
+    background: #A569BD;
+    cursor: pointer;
+}
