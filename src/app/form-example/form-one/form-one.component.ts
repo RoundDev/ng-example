@@ -13,11 +13,13 @@ export class FormOneComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    //create FormGroup using FormBuilder
+    //add validation using Angular's built in form validator
     this.personForm = this.formBuilder.group({
       'firstName': ['', Validators.required],
       'lastName': ['', Validators.required],
       'email': ['', [Validators.required, Validators.email]],
-      'phoneNumber': ['', [Validators.required, Validators.maxLength(10)]]
+      'phoneNumber': ['', [Validators.required, Validators.maxLength(11)]]
     })
   }
 
@@ -26,5 +28,13 @@ export class FormOneComponent implements OnInit {
     console.log(this.personForm);
   }
 
+  logForm(){
+    console.log(this.personForm);
+  }
 
+  patchEmail(){
+    this.personForm.patchValue({
+      'email': 'patchedEmailValue@example.com' 
+    })
+  }
 }

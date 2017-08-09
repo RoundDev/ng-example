@@ -1,8 +1,12 @@
 <div class="row justify-content-center">
+  <p>Below is an example of a Angular form built using FormGroup from Form Builder. Validation added using Validators in @angular/forms module</p>
+  <p>Submit button is disabled until form is valid. Log button will console.log() the FormGroup object</p>
   <div class="col-6">
+    <!--formGroup directive, pass FormGroup object created in component-->
     <form [formGroup]="personForm">
       <div class="form-group">
         <label for="firstName">First Name: </label>
+        <!--formControlName is used to bind a formControl from your formGroup to an input -->
         <input class="form-control" type="text" formControlName="firstName">
         <span *ngIf="personForm.controls.firstName.errors" class="invalid pull-right">First Name Required</span>
       </div>
@@ -14,13 +18,15 @@
       <div class="form-group">
         <label for="email">Email </label>
         <input class="form-control" type="email" formControlName="email">
-        <span *ngSwitch="personForm.controls.email.errors" class="invalid pull-right">
-          <span  *ngIf="personForm.controls.email.errors.email">
+        <span *ngIf="personForm.controls.email.errors" class="invalid pull-right">
+          <!--There are more elegant ways to display error msgs but this is the most straight forward -->
+          <!--Inspect the console.log() form for more properties of personForm -->
+          <div *ngIf="personForm.controls.email.errors.email">
           Invalid Email
-          </span>
-          <span *ngIf="personForm.controls.email.errors.required">
+          </div>
+          <div *ngIf="personForm.controls.email.errors.required">
           Email Required
-         </span>
+         </div>
         </span>
       </div>
       <div class="form-group">
@@ -30,7 +36,9 @@
           Phone Number Required
         </span>
       </div>
-      <button class="btn btn-primary" (click)="submit()">Submit</button>
+      <button class="btn btn-primary" [disabled]="!personForm.valid" (click)="submit()">Submit</button>
+      <button class="btn btn-secondary" (click)="logForm()">Log Form</button>
+      <button class="btn btn-warning" (click)="patchEmail()">Patch Email</button>
     </form>
   </div>
 </div>
